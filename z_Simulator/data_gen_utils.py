@@ -531,6 +531,12 @@ def estimate_accuracy(df_real,df_predicted,weight=True):
             acc+=1
     return acc/index
         
+def data_split(data):
+    week_0 = data[data['Week'] == 0]
+    other_weeks = data[data['Week'] != 0]
+    return week_0, other_weeks
+
+
             
         
 
