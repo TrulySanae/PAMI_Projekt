@@ -8,6 +8,9 @@ C_max_list = [10, 15, 20]
 V_max_list = [30, 50, 70]
 sim_weeks_list = [4, 6, 8]
 UT_list_list = [[20, 22, 24, 30, 40, 80], [10, 15, 20, 25, 30, 35], [5, 10, 15, 20, 25, 30]]
+weight_span_list = [[3,40],[6, 60], [3,20]]
+num_components_list = [2, 3, 4]
+number_of_connections_list = [1, 2, 3, 4, 5]
 
 # Number of random profiles to generate
 num_profiles = int(6)
@@ -25,7 +28,6 @@ def select_random_K():
 def select_random_lambd():
     return random.uniform(0.01, 0.2)
 
-## Initialize a DataFrame to store parameters
 params = pd.DataFrame(columns=["Dataset", "C_max", "K", "V_max", "lambd", "sim_weeks", "UT_list"])
 
 # Generate customer profiles and their corresponding DataFrames
@@ -44,6 +46,10 @@ for i in range(num_profiles//2):
         V_max = select_random_parameter(V_max_list)
         lambd = select_random_lambd()
         UT_list = select_random_parameter(UT_list_list)
+        weight_span = select_random_parameter(weight_span_list)
+        num_components = select_random_parameter(num_components_list)
+        number_of_connections = select_random_parameter(number_of_connections_list)
+        
 
         # Create a DataFrame for the current row
         current_params = pd.DataFrame([{
@@ -53,28 +59,30 @@ for i in range(num_profiles//2):
             "V_max": V_max,
             "lambd": lambd,
             "sim_weeks": sim_weeks,
-            "UT_list": UT_list
+            "UT_list": UT_list,
+            "weight_span": weight_span,
+            "num_components": num_components,
+            "number_of_connections": number_of_connections
         }])
-
         # Append current_params to the params DataFrame
         params = pd.concat([params, current_params], ignore_index=True)
 
 
-        customer_profiles = create_customer_profile(C_max, K, V_max, lambd, UT_list)
+        customer_profiles = create_customer_profile(C_max, K, V_max, lambd, UT_list,weigth_span=weight_span, num_components=num_components, number_of_connections=number_of_connections)
         customer_profiles_list.append(customer_profiles)
 
         general_df = generate_order_df(customer_profiles, UT_list, sim_weeks)
         dataframes_list.append(general_df)
 
         # Save each DataFrame to a separate CSV file
-        csv_filename = f"./Output Customer Data/customer_profile_{counter}.csv"
+        csv_filename = f"/Users/ericduhme/Documents/UNI/PAMI/PAMI_Projekt/Shift Explantion/00_simulate_data/Output Customer Data/customer_profile_{counter}.csv" # TODO: Change path
         general_df.to_csv(csv_filename, index=False)
 
         # Increase counter to match Index of customer Data
         counter += 1
 
 print(params.head(10))
-params.to_csv("./Output Customer Data/params.csv", index=False)
+params.to_csv("/Users/ericduhme/Documents/UNI/PAMI/PAMI_Projekt/Shift Explantion/00_simulate_data/Output Customer Data/params.csv", index=False) # TODO: Change path
 # Print the generated customer profiles and corresponding DataFrames
 # for i, (profiles, df) in enumerate(zip(customer_profiles_list, dataframes_list)):
 #     print(f"Customer Profile Set {i+1}:")
