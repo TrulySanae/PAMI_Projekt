@@ -93,7 +93,7 @@ def plot_gaussian_mixture_model(components):
     plt.grid(True)
     plt.show()
     
-def create_random_mean_covariance(num_components):
+def create_random_mean_covariance(num_components, weight_span):
     """
     Create random mean and covariance matrices for a Gaussian Mixture Model.
 
@@ -111,7 +111,9 @@ def create_random_mean_covariance(num_components):
     
     for _ in range(num_components):
         # Generate random mean vector with values between 2 and 40
-        mean = np.random.uniform(3, 40, 1)
+        if weight_span == None:
+            mean = np.random.uniform(3, 40, 1)
+        mean = np.random.uniform(weight_span[0], weight_span[1], 1)
         
         # Generate a random variances matrix with values between 2 and 10
         var = np.random.uniform(2, 3, 1)
@@ -210,15 +212,16 @@ def adjust_unittype_id(chosen_unittype,unit_type,permissable_unittypes):
     chosen_unittype = np.array(permissable_unittypes)[idx_prefered_unit+dev-len(permissable_unittypes)]
     return chosen_unittype
 
-def create_customer_profile(C_max, K, V_max, lambd,permissable_unittypes=[10,18,20,22,24,30,40,80]):
+def create_customer_profile(C_max, K, V_max, lambd, permissable_unittypes=[10,18,20,22,24,30,40,80],number_of_connections=None,num_components=3,weigth_span=None):
     C = set(range(1, C_max+1))
+   
     available_connections = list(C)
     K_profiles = []
     for k in range(1, K+1):
         V_k = int(np.maximum(np.exp(-lambd * k),0.05) * V_max) #Typical volume for this customer.
-        number_of_connections= random.randint(1, C_max)
+        if number_of_connections == None:
+            number_of_connections= random.randint(1, C_max)
         customer_profile = {'Customer_id':k,'V_k': V_k,'num_connections':number_of_connections, 'connections': []}
-
         for c in range(1, number_of_connections + 1):
             connection_kc = np.random.choice(available_connections) #np.random.choice(C)
             order_dist_kc = np.random.randint(1, 4) #Order Distribution during the week.
@@ -240,7 +243,7 @@ def create_customer_profile(C_max, K, V_max, lambd,permissable_unittypes=[10,18,
             unittype_std = np.random.random() # standard deviation of not picking the prefered unit
 
             #We  assume that the weights of units in a particular connection are sampled from Gaussian mixture model .
-            components =create_random_mean_covariance(num_components=3)
+            components =create_random_mean_covariance(num_components, weigth_span)
 
 
             arrival_hour= np.random.randint(1, 22)
