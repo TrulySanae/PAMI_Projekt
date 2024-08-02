@@ -9,7 +9,6 @@ load_dotenv(dotenv_path)
 
 # Zugriff auf die Umgebungsvariablen
 path_root = os.getenv('OUTPUT_PATH_FOR_ANALYSIS')
-input ("Did you change the folder name?")
 folder_name = os.getenv('CURRENT_FOLDER_NAME')  # TODO: Please change this variable accordingly
 path_customer_profiles = os.getenv('OUTPUT_CUSTOMER_PROFILES_PATHS')
 path_distances = os.getenv('OUTPUT_DISTANCES')
@@ -27,14 +26,14 @@ new_folder_path = os.path.join(path_root+folder_name)
 print("Output Hauptordner:", new_folder_path)
 
 # Sicherstellen, dass der Hauptordner existiert
-os.makedirs(new_folder_path, exist_ok=True)
+os.makedirs(new_folder_path, exist_ok=False)
 
 full_paths = []
 # Erstellen der Unterordner
 for path in paths:
     full_path = os.path.join(new_folder_path+path)
     print("Erstellen des Unterordners:", full_path)
-    os.makedirs(full_path, exist_ok=True)
+    os.makedirs(full_path, exist_ok=False)
     full_paths.append(full_path)
 
 path_customer_profiles = full_paths[0]
