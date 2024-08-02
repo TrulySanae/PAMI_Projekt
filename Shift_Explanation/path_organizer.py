@@ -37,9 +37,17 @@ for path in paths:
     full_paths.append(full_path)
 
 path_customer_profiles = full_paths[0]
+with open(path_root + "/File_Paths/path_customer_profiles.txt", "w") as f:
+    f.write(path_customer_profiles)
 path_distances = full_paths[1]
+with open(path_root + "/File_Paths/path_distances.txt", "w") as f:
+    f.write(path_distances)
 path_shift_explanations = full_paths[2]
+with open(path_root + "/File_Paths/path_shift_explanations.txt", "w") as f:
+    f.write(path_shift_explanations)
 path_transport_graphics = full_paths[3]
+with open(path_root + "/File_Paths/path_transport_graphics.txt", "w") as f:
+    f.write(path_transport_graphics)
 
 print("#"*50)
 print(path_customer_profiles)
