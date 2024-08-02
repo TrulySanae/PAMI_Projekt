@@ -2,6 +2,8 @@ import random
 import pandas as pd
 from data_gen_utils import create_customer_profile, pprint, generate_order_df
 
+path_customer_profiles = open('Shift_Explanation/Results_Experiments/File_Paths/path_customer_profiles.txt','r').read()
+path_shift_explanations = open('Shift_Explanation/Results_Experiments/File_Paths/path_shift_explanations.txt','r').read()
 
 # Define lists for each parameter
 C_max_list = [10, 15, 20]
@@ -85,14 +87,14 @@ for i in range(num_profiles//2):
         dataframes_list.append(general_df)
 
         # Save each DataFrame to a separate CSV file
-        csv_filename = f"/Users/sanaemessoudi/Desktop/Projekte/PAMI_Projekt9/Shift Explantion/00_simulate_data/Output Customer Data/customer_profile_{counter}.csv" # TODO: Change path
+        csv_filename = f"{path_customer_profiles}/customer_profile_{counter}.csv" # TODO: Change path
         general_df.to_csv(csv_filename, index=False)
 
         # Increase counter to match Index of customer Data
         counter += 1
 
 print(params.head(10))
-params.to_csv("/Users/sanaemessoudi/Desktop/Projekte/PAMI_Projekt9/Shift Explantion/00_simulate_data/Output Customer Data/params.csv", index=False) # TODO: Change path
+params.to_csv(f"{path_shift_explanations}/params.csv", index=False) # TODO: Change path
 # Print the generated customer profiles and corresponding DataFrames
 # for i, (profiles, df) in enumerate(zip(customer_profiles_list, dataframes_list)):
 #     print(f"Customer Profile Set {i+1}:")
