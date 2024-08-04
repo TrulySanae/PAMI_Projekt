@@ -9,7 +9,7 @@ from sklearn.utils import check_random_state
 
 from sklearn.utils import check_random_state
 
-def load_and_preprocess_logistics_data(path_to_data_root, random_state=None, max_samples=None, return_column_names=False, equal_week_split = True, comparison_id = 0, comparison_dict = None):
+def load_and_preprocess_logistics_data(random_state, max_samples=None, return_column_names=False, equal_week_split = True, comparison_id = 0, comparison_dict = None):
     rng = check_random_state(random_state)
     
     
@@ -26,11 +26,6 @@ def load_and_preprocess_logistics_data(path_to_data_root, random_state=None, max
 
     source_data = data_a
     target_data = data_b
-
-
-    if max_samples == 'balanced':
-        # Balance the two datasets
-        max_samples = min(source_data.shape[0], target_data.shape[0])
     
     if equal_week_split:
         # Determine the number of weeks
@@ -52,7 +47,6 @@ def load_and_preprocess_logistics_data(path_to_data_root, random_state=None, max
 
             n_samples_week_source = min(samples_per_week, source_week_data.shape[0])
             n_samples_week_target = min(samples_per_week, target_week_data.shape[0])
-
             sampled_source_data = pd.concat([sampled_source_data, source_week_data.sample(n_samples_week_source, replace=False, random_state=rng)])
             sampled_target_data = pd.concat([sampled_target_data, target_week_data.sample(n_samples_week_target, replace=False, random_state=rng)])
     else:
@@ -64,7 +58,7 @@ def load_and_preprocess_logistics_data(path_to_data_root, random_state=None, max
     # Drop columns that are not needed
     for df in [sampled_source_data, sampled_target_data]:
         df.drop(columns=['Day', 'Customer_id', 'Week'], inplace=True)
-
+    
     # Convert to numpy arrays
     source = sampled_source_data.to_numpy().astype(float)
     target = sampled_target_data.to_numpy().astype(float)
