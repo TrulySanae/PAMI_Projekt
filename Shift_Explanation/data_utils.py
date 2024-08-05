@@ -17,7 +17,6 @@ def load_and_preprocess_logistics_data(random_state, max_samples=None, return_co
     path_customer_profiles = open('./Results_Experiments/File_Paths/path_customer_profiles.txt','r').read()
     file_path_a = f'../{path_customer_profiles}/customer_profile_{comparison_dict[comparison_id][0]}.csv'
     file_path_b = f'../{path_customer_profiles}/customer_profile_{comparison_dict[comparison_id][1]}.csv'
-    print(file_path_a)
     print (f'Comparing customer_profile_{comparison_dict[comparison_id][0]} and customer_profile_{comparison_dict[comparison_id][1]}')
     
     # Load datasets
