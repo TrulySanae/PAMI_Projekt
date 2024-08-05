@@ -97,7 +97,7 @@ parameter_sets = [
     {'comparison_id': 1},
     {'comparison_id': 2}
 ]
-notebook_path = 'adult-income-experiment.ipynb'
+notebook_path = 'k_Means_cluster_transport.ipynb'
 output_path = notebook_path
 for params in parameter_sets:
     execute_notebook_with_params(notebook_path, params, output_path)
