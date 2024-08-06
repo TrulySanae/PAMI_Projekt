@@ -1,0 +1,15 @@
+Measurement,Values
+R-squared,0.9581340677649679
+Adj. R-squared,0.95503288759941
+const_coef,0.03762260099062748
+const_std_err,0.07589396216458989
+const_p>|t|,0.6240989252241969
+Connections_diff_coef,0.647286565379932
+Connections_diff_std_err,0.051992743936972924
+Connections_diff_p>|t|,1.064777309357271e-12
+Weight_diff_coef,0.8642381934504789
+Weight_diff_std_err,0.036617808366937295
+Weight_diff_p>|t|,1.4732702440015323e-19
+Unit_diff_coef,0.0
+Unit_diff_std_err,0.0
+Unit_diff_p>|t|,

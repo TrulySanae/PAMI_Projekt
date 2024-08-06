@@ -1,0 +1,27 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:         Total_distance   R-squared:                       0.997
+Model:                            OLS   Adj. R-squared:                  0.997
+Method:                 Least Squares   F-statistic:                     2825.
+Date:                Tue, 06 Aug 2024   Prob (F-statistic):           8.55e-33
+Time:                        14:00:50   Log-Likelihood:                -26.168
+No. Observations:                  30   AIC:                             60.34
+Df Residuals:                      26   BIC:                             65.94
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+====================================================================================
+                       coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------------
+const                0.5517      0.335      1.646      0.112      -0.137       1.241
+Connections_diff     0.1568      0.099      1.576      0.127      -0.048       0.361
+Weight_diff          0.9495      0.011     88.859      0.000       0.928       0.971
+Unit_diff            0.2977      0.033      8.958      0.000       0.229       0.366
+==============================================================================
+Omnibus:                        5.085   Durbin-Watson:                   1.000
+Prob(Omnibus):                  0.079   Jarque-Bera (JB):                4.645
+Skew:                           0.949   Prob(JB):                       0.0980
+Kurtosis:                       2.660   Cond. No.                         63.7
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
