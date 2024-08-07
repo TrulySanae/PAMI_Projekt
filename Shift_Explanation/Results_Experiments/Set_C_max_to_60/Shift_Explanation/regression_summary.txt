@@ -1,0 +1,29 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:         Total_distance   R-squared:                       0.987
+Model:                            OLS   Adj. R-squared:                  0.986
+Method:                 Least Squares   F-statistic:                     995.7
+Date:                Wed, 07 Aug 2024   Prob (F-statistic):           5.08e-26
+Time:                        10:13:07   Log-Likelihood:                -12.740
+No. Observations:                  30   AIC:                             31.48
+Df Residuals:                      27   BIC:                             35.68
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+====================================================================================
+                       coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------------
+const                0.1382      0.170      0.811      0.425      -0.211       0.488
+Connections_diff     0.9099      0.021     44.216      0.000       0.868       0.952
+Weight_diff          0.5200      0.054      9.678      0.000       0.410       0.630
+Unit_diff                 0          0        nan        nan           0           0
+==============================================================================
+Omnibus:                       15.757   Durbin-Watson:                   1.580
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               18.164
+Skew:                           1.394   Prob(JB):                     0.000114
+Kurtosis:                       5.599   Cond. No.                          inf
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The smallest eigenvalue is      0. This might indicate that there are
+strong multicollinearity problems or that the design matrix is singular.
