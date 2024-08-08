@@ -1,0 +1,2 @@
+split_feature,instance_1,instance_2
+Year, YEAR <= 2009, YEAR > 2009
