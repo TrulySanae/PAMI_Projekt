@@ -1,9 +1,8 @@
 import pandas as pd
 import os
 # data_path = 'NBA_Data_Analysis/Data/NBA_Data_Datatype.csv'
-data_path = 'NBA_Data_Analysis/Data/NBA_Data_Test.xlsx'
-# nba_data = pd.read_csv(data_path, sep=";", encoding='latin1')
-nba_data = pd.read_excel(data_path)
+
+
 def get_source_target_data(nba_data):
     columns_to_keep = [
         "Team", "Age", "GamesPlayed", 'MinutesPlayed' , 
@@ -57,8 +56,6 @@ def get_source_target_data(nba_data):
     return source_data, target_data, experiment_parameters, independent_vars1_drop, independent_vars2_drop
 # Split the data based on the feature in source and target data
 
-source_data, target_data, experiment_parameters, independent_vars1_drop, independent_vars2_drop = get_source_target_data(nba_data)
-
 def create_folders(experiment_parameters):
     main_folder_path = f'NBA_Data_Analysis_3_Vars/{experiment_parameters['instance_1'].replace(' ','')}_vs_{experiment_parameters['instance_2'].replace(' ','')}'
     print(main_folder_path)
@@ -89,9 +86,6 @@ def create_folders(experiment_parameters):
     path_regression = results_paths[2]
     return path_source_target, path_distances, path_baseline, path_regression
 
-create_folders(experiment_parameters)
-
-path_source_target, path_distances, path_baseline, path_regression = create_folders(experiment_parameters)
 
 def write_file_paths(path_source_target, path_distances, path_baseline, path_regression):
     with open('NBA_Data_Analysis_3_Vars/File_Paths/path_source_target.txt', 'w') as f:
@@ -103,7 +97,7 @@ def write_file_paths(path_source_target, path_distances, path_baseline, path_reg
     with open('NBA_Data_Analysis_3_Vars/File_Paths/path_regression.txt', 'w') as f:
         f.write(path_regression)
 
-def create_source_target_data(experiment_parameters, source_data, target_data, path_source_target):
+def create_source_target_data(experiment_parameters, source_data, target_data, path_source_target,independent_vars1_drop,independent_vars2_drop):
     experiment_parameters = pd.DataFrame(experiment_parameters, index=[0])
     experiment_parameters.to_csv(f'{path_source_target}/experiment_parameters.csv', index=False)
     source_data = source_data.drop(columns=['Team', 'Year', independent_vars1_drop[0], independent_vars2_drop[0]])
@@ -112,5 +106,12 @@ def create_source_target_data(experiment_parameters, source_data, target_data, p
     source_data.to_csv(f'{path_source_target}/source_data_{experiment_parameters['instance_1'].values[0].replace(' ','')}.csv', index=False)
     target_data.to_csv(f'{path_source_target}/target_data_{experiment_parameters['instance_2'].values[0].replace(' ','')}.csv', index=False)
  
-write_file_paths(path_source_target, path_distances, path_baseline, path_regression)   
-create_source_target_data(experiment_parameters, source_data, target_data, path_source_target)
+def create_all_data():
+    data_path = 'NBA_Data_Analysis_3_Vars/Data/NBA_Data_Test.xlsx'
+    nba_data = pd.read_excel(data_path)
+    source_data, target_data, experiment_parameters, independent_vars1_drop, independent_vars2_drop = get_source_target_data(nba_data)
+    path_source_target, path_distances, path_baseline, path_regression = create_folders(experiment_parameters)
+    write_file_paths(path_source_target, path_distances, path_baseline, path_regression) 
+    create_source_target_data(experiment_parameters, source_data, target_data, path_source_target, independent_vars1_drop, independent_vars2_drop)  
+
+#create_all_data()
