@@ -7,8 +7,12 @@ import statsmodels.api as sm
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 # Load the CSV file
-path = 'NBA_Data_Analysis_3_Vars/NBA_results/distance_from_GSW.csv'
-df_distances = pd.read_csv(path)
+path_distances = open('./NBA_Data_Analysis_3_Vars/File_Paths/path_distances.txt', 'r').read()
+path_source_target = open('./NBA_Data_Analysis_3_Vars/File_Paths/path_source_target.txt', 'r').read()
+parameters = pd.read_csv(f'./{path_source_target}/experiment_parameters.csv')
+print(parameters)
+file_path = f'./{path_distances}/distance_from_{parameters['instance_1'].values[0]}_to_{parameters['instance_2'].values[0]}.csv'
+df_distances = pd.read_csv(file_path)
 
 # List of attributes to calculate standard deviation
 #attributes_list = ['Mean_Signed_Difference', 'Age', 'Gam', 'Win', 'Los', 'Poi', 'FG%', '3P%', 'FT%', 'Tot', 'Ass', 'Tur', 'Ste', 'Blo', 'Per']
@@ -61,3 +65,7 @@ feature_importance = feature_importance.sort_values(by='importance', ascending=F
 
 print("Feature Importances:")
 print(feature_importance)
+
+
+file_path_regression = open('./NBA_Data_Analysis_3_Vars/File_Paths/path_regression.txt', 'r').read()
+feature_importance.to_csv(f'./{file_path_regression}/feature_importance.csv', index=False)
