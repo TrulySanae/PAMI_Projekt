@@ -57,7 +57,7 @@ def get_source_target_data(nba_data):
 # Split the data based on the feature in source and target data
 
 def create_folders(experiment_parameters):
-    main_folder_path = f'NBA_Data_Analysis_3_Vars/{experiment_parameters['instance_1'].replace(' ','')}_vs_{experiment_parameters['instance_2'].replace(' ','')}'
+    main_folder_path = f'NBA_Data_Analysis_3_Vars/{experiment_parameters['instance_1'].replace(' ','')}_vs_{experiment_parameters['instance_2'].replace(' ','')}_{experiment_parameters['independent_var1']}_{experiment_parameters['independent_var2']}'
     print(main_folder_path)
     folders_list = ['/Source_Target', '/Results_Experiments']
     results_folders = ['/Distance','/Baseline_Meanshift','/Regression']
