@@ -58,7 +58,7 @@ def get_source_target_data(nba_data):
 
 def create_folders(experiment_parameters):
     main_folder_path = f'NBA_Data_Analysis_3_Vars/{experiment_parameters['instance_1'].replace(' ','')}_vs_{experiment_parameters['instance_2'].replace(' ','')}_{experiment_parameters['independent_var1']}_{experiment_parameters['independent_var2']}'
-    print(main_folder_path)
+    notbook_folder_path = f'{experiment_parameters['instance_1'].replace(' ','')}_vs_{experiment_parameters['instance_2'].replace(' ','')}_{experiment_parameters['independent_var1']}_{experiment_parameters['independent_var2']}'
     folders_list = ['/Source_Target', '/Results_Experiments']
     results_folders = ['/Distance','/Baseline_Meanshift','/Regression']
     results_paths = []
@@ -84,10 +84,10 @@ def create_folders(experiment_parameters):
     path_distances = results_paths[0]
     path_baseline = results_paths[1]
     path_regression = results_paths[2]
-    return path_source_target, path_distances, path_baseline, path_regression
+    return path_source_target, path_distances, path_baseline, path_regression, notbook_folder_path
 
 
-def write_file_paths(path_source_target, path_distances, path_baseline, path_regression):
+def write_file_paths(path_source_target, path_distances, path_baseline, path_regression, notebook_folder_path):
     with open('NBA_Data_Analysis_3_Vars/File_Paths/path_source_target.txt', 'w') as f:
         f.write(path_source_target)
     with open('NBA_Data_Analysis_3_Vars/File_Paths/path_distances.txt', 'w') as f:
@@ -96,6 +96,9 @@ def write_file_paths(path_source_target, path_distances, path_baseline, path_reg
         f.write(path_baseline)
     with open('NBA_Data_Analysis_3_Vars/File_Paths/path_regression.txt', 'w') as f:
         f.write(path_regression)
+    with open('NBA_Data_Analysis_3_Vars/File_Paths/notebook_folder_path.txt', 'w') as f:
+        f.write(notebook_folder_path)
+
 
 def create_source_target_data(experiment_parameters, source_data, target_data, path_source_target,independent_vars1_drop,independent_vars2_drop):
     experiment_parameters = pd.DataFrame(experiment_parameters, index=[0])
@@ -110,8 +113,8 @@ def create_all_data():
     data_path = 'NBA_Data_Analysis_3_Vars/Data/NBA_Data_Test.xlsx'
     nba_data = pd.read_excel(data_path)
     source_data, target_data, experiment_parameters, independent_vars1_drop, independent_vars2_drop = get_source_target_data(nba_data)
-    path_source_target, path_distances, path_baseline, path_regression = create_folders(experiment_parameters)
-    write_file_paths(path_source_target, path_distances, path_baseline, path_regression) 
+    path_source_target, path_distances, path_baseline, path_regression, notebook_folder_path = create_folders(experiment_parameters)
+    write_file_paths(path_source_target, path_distances, path_baseline, path_regression, notebook_folder_path) 
     create_source_target_data(experiment_parameters, source_data, target_data, path_source_target, independent_vars1_drop, independent_vars2_drop)  
 
 #create_all_data()
