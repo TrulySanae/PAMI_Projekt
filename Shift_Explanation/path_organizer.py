@@ -46,6 +46,7 @@ def folder_path_creation():
     path_distances = full_paths[1]
     path_shift_explanations = full_paths[2]
     path_transport_graphics = full_paths[3]
+    notebook_folder_path = f'Results_Experiments{folder_name}'
 
     with open(path_root + "/File_Paths/path_customer_profiles.txt", "w") as f:
         f.write(path_customer_profiles)
@@ -55,3 +56,8 @@ def folder_path_creation():
         f.write(path_shift_explanations)
     with open(path_root + "/File_Paths/path_transport_graphics.txt", "w") as f:
         f.write(path_transport_graphics)
+    with open(path_root + "/File_Paths/notebook_folder_path.txt", "w") as f:
+        f.write(notebook_folder_path)
+
+
+folder_path_creation()
