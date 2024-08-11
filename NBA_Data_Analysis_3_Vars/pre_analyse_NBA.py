@@ -14,6 +14,7 @@ def calculate_feature_importance():
     print(parameters)
     file_path = f'./{path_distances}/distance_from_{parameters['instance_1'].values[0]}_to_{parameters['instance_2'].values[0]}.csv'
     df_distances = pd.read_csv(file_path)
+    df_distances = df_distances.drop(columns=['Parent_cluster', 'Child_cluster'])
 
     # List of attributes to calculate standard deviation
     #attributes_list = ['Mean_Signed_Difference', 'Age', 'Gam', 'Win', 'Los', 'Poi', 'FG%', '3P%', 'FT%', 'Tot', 'Ass', 'Tur', 'Ste', 'Blo', 'Per']

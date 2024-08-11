@@ -2,6 +2,7 @@ from create_source_target_data import create_all_data
 from pre_analyse_NBA import calculate_feature_importance
 import papermill as pm
 import os
+from analyse_NBA_results import create_summary
 
 # Create source and target data
 create_all_data()
@@ -22,3 +23,6 @@ os.chdir(default_path)
 
 # Calculate feature importance
 calculate_feature_importance()
+
+# Regression analysis
+create_summary()

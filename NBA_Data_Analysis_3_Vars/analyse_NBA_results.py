@@ -5,12 +5,16 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 def create_summary():
     # Load the CSV file
-    path = 'NBA_Data_Analysis/NBA_results/distance_from_BOS.csv'
-    df_distances = pd.read_csv(path)
+    path_distances = open('./NBA_Data_Analysis_3_Vars/File_Paths/path_distances.txt', 'r').read()
+    path_source_target = open('./NBA_Data_Analysis_3_Vars/File_Paths/path_source_target.txt', 'r').read()
+    parameters = pd.read_csv(f'./{path_source_target}/experiment_parameters.csv')
+    print(parameters)
+    file_path = f'./{path_distances}/distance_from_{parameters['instance_1'].values[0]}_to_{parameters['instance_2'].values[0]}.csv'
+    df_distances = pd.read_csv(file_path)
+    df_distances = df_distances.drop(columns=['Parent_cluster', 'Child_cluster'])
 
     # List of attributes to calculate standard deviation
-    attributes_list = ['Total_distance', 'Age', 'Gam', 'Win', 'Los', 
-                       'Poi', 'FG%', '3P%', 'FT%', 'Tot', 'Ass', 'Tur', 'Ste', 'Blo', 'Per']
+    attributes_list = list(df_distances.columns)
 
     # Calculate standard deviations and round to 2 decimal places
     std_values = [np.std(df_distances[attribute]).round(2) for attribute in attributes_list]
@@ -23,11 +27,11 @@ def create_summary():
     # Sort the DataFrame by 'Standard_Deviation'
     deviations = deviations.sort_values(by='Standard_Deviation')
     # Save the deviations DataFrame to a CSV file
-    output_path = "NBA_Data_Analysis/Results_Experiments/Calculated_Variances.csv"
-    deviations.to_csv(output_path, index=False)
+    # output_path = "NBA_Data_Analysis/Results_Experiments/Calculated_Variances.csv"
+    # deviations.to_csv(output_path, index=False)
     # Define the dependent and independent variables
-    X = df_distances[['Age', 'Gam', 'Win', '3P%', 'Tot', 'Blo']]
-    y = df_distances['Total_distance']
+    X = df_distances[attributes_list[2:]]
+    y = df_distances[attributes_list[1]]
 
     # Add a constant to the independent variables
     X = sm.add_constant(X)
@@ -45,21 +49,14 @@ def create_summary():
     for var in X.columns[1:]:  # Skip 'const'
         regression_results["Measurement"].extend([f"{var}_coef", f"{var}_std_err", f"{var}_p>|t|"])
         regression_results["Values"].extend([model.params[var], model.bse[var], model.pvalues[var]])
-    # Convert the dictionary to a DataFrame
-    regression_results_df = pd.DataFrame(regression_results)
-    # Save the regression results to a CSV file
-    regression_results_path = "NBA_Data_Analysis/Results_Experiments/regression_results.csv"
-    regression_results_df.to_csv(regression_results_path, index=False)
-    # Print the model summary to the console
     print(model_summary)
 
 
 
-
+    file_path_regression = open('./NBA_Data_Analysis_3_Vars/File_Paths/path_regression.txt', 'r').read()
 
     # Save the regression summary to a text file
-    summary_output_path = "NBA_Data_Analysis/Results_Experiments/regression_summary.txt"
-    with open(summary_output_path, 'w') as f:
+    with open(file_path_regression+'/regression_results.txt', 'w') as f:
         f.write(model_summary.as_text())
 
-create_summary()
+# create_summary()
