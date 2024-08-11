@@ -82,6 +82,7 @@ datasets_creation(C_max, V_max, lambd, UT_list, weight_span, num_components, num
 
 
 # Processing the data to get distances and Transportcosts
+notebook_folder_path = open('Shift_Explanation/File_Paths/notebook_folder_path.txt', 'r').read()  
 default_path = os.getcwd()
 os.chdir('Shift_Explanation')
 print(os.getcwd())
@@ -98,7 +99,7 @@ parameter_sets = [
     {'comparison_id': 2}
 ]
 notebook_path = 'k_Means_cluster_transport.ipynb'
-output_path = notebook_path
+output_path = f'{notebook_folder_path}/{notebook_path}'
 for params in parameter_sets:
     execute_notebook_with_params(notebook_path, params, output_path)
 
