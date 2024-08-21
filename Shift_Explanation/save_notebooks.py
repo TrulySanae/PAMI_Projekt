@@ -71,13 +71,13 @@ for folder_name in folders:
         {'comparison_id': 2}
     ]
 
-    notebook_path = 'k_Means_cluster_transport.ipynb'
+    notebook_path = 'experiment_baseline.ipynb'
     
 
     for i, params in enumerate(parameter_sets, start=1):
         
         # Füge dem Dateinamen einen Zähler hinzu
-        output_path = f'./{notebook_folder_path}/k_Means_cluster_transport_{i}.ipynb'
+        output_path = f'./{notebook_folder_path}/experiment_baseline_{i}.ipynb'
         # if os.path.exists(output_path):
         #     continue
         print(output_path)
