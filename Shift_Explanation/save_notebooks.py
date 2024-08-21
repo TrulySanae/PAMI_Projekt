@@ -4,6 +4,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 folders = [
+    "Baseline",
     "Set_C_max_to_10",
     "Set_C_max_to_60",
     "Set_C_max_to_None_Set_V_max_to_None_Set_lambd_to_None_Set_UT_list_to_None_Set_weight_span_to_None_Set_num_components_to_None_Set_number_of_connections_to_None",
