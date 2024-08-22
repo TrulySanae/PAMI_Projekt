@@ -12,13 +12,13 @@ env_var_value = '"/Test"'
 # TODO: Choose fixe parameters to create datasets
 print("#"*50)
 chosen_simulation_parameters = {
-"K": 50,
+    "K": 50,
     "sim_weeks": 6,
     "C_max": 20,
     "V_max": 50,
     "lambd": 0.1,
     "UT_list": [20, 20, 20, 20, 20, 20],
-    "weight_span": None,
+    "weight_span": [3, 40],
     "num_components": 3,
     "number_of_connections": 5,
     "num_profiles": 6, #Default is 6
@@ -82,10 +82,11 @@ datasets_creation(C_max, V_max, lambd, UT_list, weight_span, num_components, num
 
 
 # Processing the data to get distances and Transportcosts
-notebook_folder_path = open('Shift_Explanation/File_Paths/notebook_folder_path.txt', 'r').read()  
+notebook_folder_path = open('Shift_Explanation/Results_Experiments/File_Paths/notebook_folder_path.txt', 'r').read()  
 default_path = os.getcwd()
 os.chdir('Shift_Explanation')
 print(os.getcwd())
+
 
 def execute_notebook_with_params(notebook_path, parameters, output_path):
     pm.execute_notebook(
@@ -93,15 +94,24 @@ def execute_notebook_with_params(notebook_path, parameters, output_path):
         output_path,
         parameters=parameters
     )
+
 parameter_sets = [
     {'comparison_id': 0,},
     {'comparison_id': 1},
     {'comparison_id': 2}
 ]
-notebook_path = 'k_Means_cluster_transport.ipynb'
-output_path = f'{notebook_folder_path}/{notebook_path}'
-for params in parameter_sets:
-    execute_notebook_with_params(notebook_path, params, output_path)
+notebooks = ['experiment_baseline', 'k_Means_cluster_transport']
+
+
+for notebook in notebooks:
+    for i, params in enumerate(parameter_sets, start=1):
+        
+        # Füge dem Dateinamen einen Zähler hinzu
+        output_path = f'./{notebook_folder_path}/{notebook}_{i}.ipynb'
+        # if os.path.exists(output_path):
+        #     continue
+        print(output_path)
+        execute_notebook_with_params(f'{notebook}.ipynb', params, output_path)
 
 os.chdir(default_path)
 

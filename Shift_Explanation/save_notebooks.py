@@ -72,16 +72,17 @@ for folder_name in folders:
         {'comparison_id': 2}
     ]
 
-    notebook_path = 'experiment_baseline.ipynb'
+    notebooks = ['experiment_baseline', 'k_Means_cluster_transport']
     
 
-    for i, params in enumerate(parameter_sets, start=1):
-        
-        # Füge dem Dateinamen einen Zähler hinzu
-        output_path = f'./{notebook_folder_path}/experiment_baseline_{i}.ipynb'
-        # if os.path.exists(output_path):
-        #     continue
-        print(output_path)
-        execute_notebook_with_params(notebook_path, params, output_path)
+    for notebook in notebooks:
+        for i, params in enumerate(parameter_sets, start=1):
+            
+            # Füge dem Dateinamen einen Zähler hinzu
+            output_path = f'./{notebook_folder_path}/{notebook}_{i}.ipynb'
+            # if os.path.exists(output_path):
+            #     continue
+            print(output_path)
+            execute_notebook_with_params(f'{notebook}.ipynb', params, output_path)
 
     
