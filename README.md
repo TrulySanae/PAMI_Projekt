@@ -6,8 +6,7 @@ If you have any questions or problems running the code, please reach out to us!
 # Code for our Project
 
 
-To recreate the results for the experiment, first create the corresponding environment (via conda by `conda env create -f environment.yml`). 
-# TODO: adjust the environment.yml file
+To recreate the results for the experiment, first create the corresponding environment (via conda by `conda env create -f environment.yml`). # TODO: adjust the environment.yml file
 
 We condoned 3 experiments in our project. You can find then in the Shift_Explanation, NBA_Data_Analysis and NBA_Data_Analysis_3_Vars folders. You will find all the results for our experiments. 
 If you want to create new results with different parameter please refer to following instructions:
