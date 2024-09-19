@@ -1,32 +1,25 @@
-# Explaining Distribution Shifts Overview
+# Group 9: Explaining Distribution Shifts
 
-Greeting :wave:! This is the repository for the IMCL Publication [Towards Explaining Distribution Shifts](https://arxiv.org/abs/2210.10275). 
-In this work we answer the question: ''What is a distribution shift explanation?'' and introduce a novel framework for explaining distribution shifts via transportation maps between a source and target distribution which are either inherently interpretable or interpreted using post-hoc interpretability methods.
-![Shift explanation overview](featured.png)
+Hey this is the repository for our project: Explaining Distribution Shifts.
+If you have any questions or problems running the code, please reach out to us!
 
-# Code for the ICML Publication: Towards Explaining Distribution Shifts
-
-To recreate the results for the experiment, first create the corresponding environment (via conda by `conda env create -f environment.yml`).
-
-Then unzip the `data.zip` file.
-
-Within the `notebooks` folder, you can find all the corresponding jupyter notebooks to recreate the experiments. For example, to recreate the shift explanation results for the adult-income dataset, just run the `adult-income-experiment.ipynb` notebook (and for the baselines, run the `adult-income-experiment-baseline.ipynb`). 
-
-If you have any troubles running these, feel free to reach out to the contacts listed [in our ICML paper](https://arxiv.org/abs/2210.10275) or via the contact [from the first-author's website](https://www.seankulinski.com/).
-
-Cheers!
+# Code for our Project
 
 
+To recreate the results for the experiment, first create the corresponding environment (via conda by `conda env create -f environment.yml`). 
+# TODO: adjust the environment.yml file
 
-# Bibtex Citation
-If you reference this work, please consider citing our publication:
-```
-@inproceedings{kulinski2023towards,
-  title={Towards explaining distribution shifts},
-  author={Kulinski, Sean and Inouye, David I},
-  booktitle={International Conference on Machine Learning},
-  pages={17931--17952},
-  year={2023},
-  organization={PMLR}
-}
-```
+We condoned 3 experiments in our project. You can find then in the Shift_Explanation, NBA_Data_Analysis and NBA_Data_Analysis_3_Vars folders. You will find all the results for our experiments. 
+If you want to create new results with different parameter please refer to following instructions:
+
+Simulated Logistics data:
+For the simulated logistic data you need to run the run_experiment.py in the Shift_Explanation folder.
+To adjust the parameters you need to change the chosen chosen_simulation_parameters within the module.
+After you run the programm you will find your new results in the Results_Experiments folder.
+
+NBA Experiments:
+
+To run the code for the NBA Data experiments you simply need to run the run_nba_experiment.py in the NBA_Data_Analysis (NBA_Data_Analyis_3_Vars) folder. You will be asked to select the features you split the data on over the console.
+
+PLEASE NOTE: We tested this code in Visual Studio Code. 
+
